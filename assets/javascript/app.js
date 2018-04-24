@@ -65,15 +65,27 @@ $(document).ready(function () {
         console.log(frequency);
 
 
+        //var currentTime = moment().format('HHmm');
+        //console.log('this is the current time: ' + currentTime);
+        //console.log('this is the first train time: ' + firstTrain);
+        //var divide = firstTrain - currentTime;
+        //var minutesAway = divide/1.66;
+        //Math.ceil(minutesAway);
+        //console.log('this many minutes away '+minutesAway);
+ 
+
+
         function addingRows() {
 
-            $('.table-dark>tbody:last').append("<tr><td>" + trainName+"</td><td>" + destination+"</td><td>" + frequency+"</td><td>" + firstTrain+ "</td><td>" + 'minutesaway');
-    
-    
+            $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + firstTrain + "</td><td>" + 'minutesAway');
+
+
         };
 
         addingRows();
     });
+
+
 
 
 
