@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-
-
-
     var config = {
         apiKey: "AIzaSyBb1aBpu_QJSDe3ve1z4NAkDDJyp1Y7jhA",
         authDomain: "trainschedule-1c628.firebaseapp.com",
@@ -16,14 +13,11 @@ $(document).ready(function () {
 
     var database = firebase.database();
 
-
-
     $('#submitBtn').one('click', function (event) {
         event.preventDefault();
         var trainName = $('#train-input').val().trim();
         var destination = $('#destination-input').val().trim();
         var firstTrain = $('#first-train-input').val().trim();
-        //find moment js info later for this entry
         var frequency = $('#frequency-input').val().trim();
 
         var newTrain = {
@@ -31,63 +25,37 @@ $(document).ready(function () {
             place: destination,
             start: firstTrain,
             rate: frequency
+
         };
 
         database.ref().push(newTrain);
-
-        console.log(newTrain.name);
-        console.log(newTrain.place);
-        console.log(newTrain.start);
-        console.log(newTrain.rate);
 
         $("#train-input").val("");
         $("#destination-input").val("");
         $("#first-train-input").val("");
         $("#frequency-input").val("");
 
-
     });
 
     database.ref().on("child_added", function (childSnapshot, prevChildKey) {
-
-        console.log(childSnapshot.val());
-
 
         var trainName = childSnapshot.val().name;
         var destination = childSnapshot.val().place;
         var firstTrain = childSnapshot.val().start;
         var frequency = childSnapshot.val().rate;
-
-
-        console.log(trainName);
-        console.log(destination);
-        console.log(firstTrain);
-        console.log(frequency);
-
-
-        //var currentTime = moment().format('HHmm');
-        //console.log('this is the current time: ' + currentTime);
-        //console.log('this is the first train time: ' + firstTrain);
-        //var divide = firstTrain - currentTime;
-        //var minutesAway = divide/1.66;
-        //Math.ceil(minutesAway);
-        //console.log('this many minutes away '+minutesAway);
- 
-
+        var minutesAway = "I dont know";
+        //I cannot figure out how to calculate how far away the train is based on how often it runs .
 
         function addingRows() {
 
-            $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + firstTrain + "</td><td>" + 'minutesAway');
+            $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + firstTrain + "</td><td>" + minutesAway);
 
 
         };
 
         addingRows();
+
     });
-
-
-
-
 
 
 
