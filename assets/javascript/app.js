@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     var database = firebase.database();
 
-    $('#submitBtn').one('click', function (event) {
+    $('#submitBtn').on('click', function (event) {
         event.preventDefault();
         var trainName = $('#train-input').val().trim();
         var destination = $('#destination-input').val().trim();
@@ -43,17 +43,24 @@ $(document).ready(function () {
         var destination = childSnapshot.val().place;
         var firstTrain = childSnapshot.val().start;
         var frequency = childSnapshot.val().rate;
-        var minutesAway = "I dont know";
-        //I cannot figure out how to calculate how far away the train is based on how often it runs .
+        var timeArr = firstTrain.split(":");
+        var trainTime = moment().hours(timeArr[0]).minutes(timeArr[1]);
+        var maxMoment = moment.max(moment(), trainTime);
+        var tMinutes;
+        var tArrival;
 
-        function addingRows() {
+        if (maxMoment ===trainTime){
+            tArrival= trainTime.format("hh:mm A");
+            tMinutes = trainTime.diff(moment(), "minutes");
+        }else {
+            var differenceTimes = moment().diff(trainTime, "minutes");
+            var tRemainder = differenceTimes % frequency;
+            tMinutes = frequency- tRemainder;
+            tArrival=moment().add(tMinutes, "m").format("hh:mm A");
+        }
+    
 
-            $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + firstTrain + "</td><td>" + minutesAway);
-
-
-        };
-
-        addingRows();
+            $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + tArrival + "</td><td>" + tMinutes);  
 
     });
 
