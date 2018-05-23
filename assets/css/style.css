@@ -5,4 +5,39 @@
 
 #submitBtn{
     background-color:black;
+    font-family: 'Audiowide', cursive;
+    border: white solid 1px;
+    opacity: .8;
+}
+
+body{
+    background-image:url("../pictures/train-bg2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Aldrich', sans-serif;
+}
+
+.table-dark{
+    opacity: .8;
+    border-radius:5px;
+    border:white solid 2px;
+
+}
+
+.table-dark p{
+    opacity: 1;
+
+}
+
+
+.form-control{
+    opacity: .8;
+}
+
+.container-fluid h1, h5{
+    font-family: 'Audiowide', cursive
+}
+
+h4{
+    font-family: 'Audiowide', cursive
 }

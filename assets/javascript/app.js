@@ -34,7 +34,8 @@ $(document).ready(function () {
         $("#destination-input").val("");
         $("#first-train-input").val("");
         $("#frequency-input").val("");
-
+       
+    
     });
 
     database.ref().on("child_added", function (childSnapshot, prevChildKey) {
@@ -49,22 +50,27 @@ $(document).ready(function () {
         var tMinutes;
         var tArrival;
 
-        if (maxMoment ===trainTime){
-            tArrival= trainTime.format("hh:mm A");
+        if (maxMoment === trainTime) {
+            tArrival = trainTime.format("hh:mm A");
             tMinutes = trainTime.diff(moment(), "minutes");
-        }else {
+        } else {
             var differenceTimes = moment().diff(trainTime, "minutes");
             var tRemainder = differenceTimes % frequency;
-            tMinutes = frequency- tRemainder;
-            tArrival=moment().add(tMinutes, "m").format("hh:mm A");
+            tMinutes = frequency - tRemainder;
+            tArrival = moment().add(tMinutes, "m").format("hh:mm A");
         }
-    
 
-            $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + tArrival + "</td><td>" + tMinutes);  
+
+        $('.table-dark>tbody:last').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + tArrival + "</td><td>" + tMinutes);
+
+        
 
     });
-
+    
 
 
 });
 
+
+// need to add ability to submit form multiple times
+// need to prevent user from leaving area's of form blank triggering a warning 
